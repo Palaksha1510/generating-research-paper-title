@@ -104,7 +104,7 @@ Here's a table of the first 5 matches. See if you can guess which are the real t
 
 ㅤ
 
-**Answers** sǝlʇᴉʇ lɐǝɹ ǝɥʇ suᴉɐʇuoɔ ꓭ uɯnloƆ
+**Answers** 
 The generated titles often seem to be overly general, missing the detailed specificity of the real titles (e.g. "Sparse vicious attacks" rather than "Adversarial attacks").
 
 **Some possible followups**
