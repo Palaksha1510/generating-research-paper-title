@@ -47,7 +47,7 @@ During preprocessing, paper titles with irregular formatting were removed and di
 
 ## 2  &nbsp; Finetuned paper title generation (gptneo)
 
-To improve the model's ability to generate cogent titles, we finetune it on a large corpuse of titles. We start from the [gpt-neo-2.7B checkpoint](https://huggingface.co/EleutherAI/gpt-neo-2.7B) (see our [training script](https://github.com/csinva/gpt-paper-title-generator/blob/91d8aa78d83f16778a120ec4a3dc41be28f5e8f2/gptneo/02_finetune_hf.py) for hyperparameters). We finetune on all [paper titles on arXiv](https://www.kaggle.com/datasets/Cornell-University/arxiv) in the categories cs.AI, cs.LG, stat.ML up to Oct 13, 2022. We exclude all papers after Apr 1, 2022 (to test the ability to forecast new papers) and an additional random 5\% of titles.
+To improve the model's ability to generate cogent titles, we finetune it on a large corpuse of titles. We start from the [gpt-neo-2.7B checkpoint](https://huggingface.co/EleutherAI/gpt-neo-2.7B). We finetune on all [paper titles on arXiv](https://www.kaggle.com/datasets/Cornell-University/arxiv) in the categories cs.AI, cs.LG, stat.ML up to Oct 13, 2022. We exclude all papers after Apr 1, 2022 (to test the ability to forecast new papers) and an additional random 5\% of titles.
 We also exclude titles with a length of less than 6 words or greater than 20 words. This results in 98,388 papers for finetuning:
 
 ![](https://csinva.io/gpt-paper-title-generator/figs/paper_metadata.svg)
@@ -88,7 +88,7 @@ We've released our finetuned model if you want to play with it:
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
-model = AutoModelForCausalLM.from_pretrained("csinva/gpt-neo-2.7B-titles")
+model = AutoModelForCausalLM.from_pretrained("palakshaMacbook/gpt-neo-2.7B-titles")
 tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-2.7B")
 pipe = pipeline('text-generation', model=model, tokenizer=tokenizer)
 pipe('2022\n\n')
@@ -96,8 +96,7 @@ pipe('2022\n\n')
 > Automating the Visualization of Convolutional Neural Networks
 ```
 
-During finetuning each paper title was given in the format `<year>\n\n <title>\n` (e.g. `2020\n\n Interpretations are useful: penalizing explanations to align neural networks with prior knowledge\n`). The same format should be used for inference. These samples are considerably better than the samples we made with GPT2 [back in 2019](https://csinva.io/gpt-paper-title-generator/gpt2) (the good old days).
-
+During finetuning each paper title was given in the format `<year>\n\n <title>\n` (e.g. `2020\n\n Interpretations are useful: penalizing explanations to align neural networks with prior knowledge\n`). The same format should be used for inference. These samples are considerably better than the samples we made with GPT2.
 
 ## 3  &nbsp; Generated paper evaluation
 
